@@ -1,8 +1,8 @@
-#1. command line
-#2. tfvars
-#3. env variables
-#4. variable default value
-
+#ec2 variables
+variable "instance_names" {
+    type = list 
+    default = ["db" , "backend" , "frontend"]
+}
 variable "image_id" {
   type = string
   default = "ami-090252cbe067a9e58"
@@ -15,15 +15,15 @@ variable "instance_type" {
   description = " type of instance" 
 }
 
-variable "tags" {
+variable "common_tags" {
     default = {
         Project = "Expense"
         Environment = "Dev"
-        Module = "DB"
-        Name = "DB"
+        Terraform = "true"
     }
 }
 
+#sg variables
 variable "sg_name" {
     default = "allow_ssh"
 
@@ -45,4 +45,14 @@ variable "protocol" {
 variable "allow_cidr" {
    type = list
    default = ["0.0.0.0/0"]
+}
+
+#r53 variables
+variable "zone_id" {
+    type = string
+    default = "Z004951729TTPAP8JUY6K"
+}
+
+variable "domain_name" {
+    default = "nirvanan.online"
 }
